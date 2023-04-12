@@ -13,7 +13,7 @@ const resolvers = {
     },
 
     Mutation: {
-        createUser: async(parent, { username, email, password }) =>{
+        addUser: async(parent, { username, email, password }) =>{
             const user = await User.create({ username, email, password });
             const token = signToken(user);
             return { user, token }
@@ -56,6 +56,8 @@ const resolvers = {
                 return user
             }
             throw new AuthenticationError('You need to be logged in!')
-        }
+        },
     }
 }
+
+module.exports = resolvers;
