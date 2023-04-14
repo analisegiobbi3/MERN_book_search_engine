@@ -17,7 +17,7 @@ import { removeBookId } from '../utils/localStorage';
 const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME)
   let userData = data?.me || {}
-  const [deleteBook] = useMutation(REMOVE_BOOK)
+  const [removeBook] = useMutation(REMOVE_BOOK)
 
   // use this to determine if `useEffect()` hook needs to run again
 
@@ -30,7 +30,7 @@ const SavedBooks = () => {
     }
 
     try {
-      const { user } = await deleteBook({
+      const { user } = await removeBook({
         variables:{
           bookId: bookId,
         }

@@ -2,9 +2,10 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express')
 const path = require('path');
 //uncomment when you have built out these two files
-const { typeDefs, resolvers } = require('./schema')
+const { typeDefs, resolvers } = require('./schemas')
 const db = require('./config/connection');
 const { __Directive } = require('graphql');
+const { authMiddleware } = require('./utils/auth');
 //no longer need this with the resolvers
 // const routes = require('./routes');
 
@@ -15,7 +16,6 @@ const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: authMiddleware,
 });
 
 app.use(express.urlencoded({ extended: true }));
@@ -26,14 +26,15 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-app.get('/', (req, res) =>{
-  res.sendFile(path.json(__dirname, '../client/build/index.js'))
-})
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 //uncomment when you have the middleware built out 
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
   server.applyMiddleware({ app })
+  context: authMiddleware
 }
 
 
