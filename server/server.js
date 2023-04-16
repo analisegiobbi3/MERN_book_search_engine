@@ -4,7 +4,6 @@ const path = require('path');
 //uncomment when you have built out these two files
 const { typeDefs, resolvers } = require('./schemas')
 const db = require('./config/connection');
-const { __Directive } = require('graphql');
 const { authMiddleware } = require('./utils/auth');
 //no longer need this with the resolvers
 // const routes = require('./routes');
@@ -16,6 +15,7 @@ const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: authMiddleware,
 });
 
 app.use(express.urlencoded({ extended: true }));
@@ -34,7 +34,6 @@ app.get('/', (req, res) => {
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
   server.applyMiddleware({ app })
-  context: authMiddleware
 }
 
 
