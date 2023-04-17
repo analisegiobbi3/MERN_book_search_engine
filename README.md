@@ -15,13 +15,16 @@
   ---
 
   ## [Description](#table-of-contents)
-  refactor 
+  The purpose of this project was to refactor existing code from a RESTful API to using graphQL. The project demonstrates skills with MERN.
+
 
   ## [Installation](#table-of-contents)
-  n/a
+  To install this application locally, clone the repo provided. 
+  Run a `git install` to install all dependencies 
+  Run `git run develop` to start the application online
 
   ## [Usage](#table-of-contents)
-  n/a
+  This website can be used to search and save books through the Google API. This application can also be used to demonstrate the difference between a RESTful API and graphQL. The application was converted from the former API to user Apollo-client and graphQL.
 
   ## [License](#table-of-contents)
   n/a
